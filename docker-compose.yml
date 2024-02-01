@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+
+  odoo:
+#    image: odoo:16
+    build:
+      context:
+        ./
+      args:
+        - DEV_MODE=${DEV_MODE}
+    ports:
+      - "8066:8069"
+      - "8072:8072"
+    restart: always
+#    command: python3 <(curl -s https://upgrade.odoo.com/upgrade) test -d test -t 17.0
+#    command: yes > /dev/null
+#    command: odoo -u netsuite_integration
+    command: /mnt/commands/odoo.sh
+#    command: >
+#       sh -c "envsubst < /mnt/extra-addons/netsuite_integration/data/ns.integration.setup.csv.template > /mnt/extra-addons/netsuite_integration/data/ns.integration.setup.csv \
+#             && odoo -u netsuite_integration"
+
+    volumes:
+#      - ./odoo/addons:/usr/lib/python3/dist-packages/odoo/addons
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+      - ./commands:/mnt/commands
+#      - ./odoo_system/odoo/base:/usr/lib/python3/dist-packages/odoo/addons/base
+      - ./odoo_system/addons/base:/usr/lib/python3/dist-packages/odoo/addons/base
+      - ./odoo_system/addons/base_import:/usr/lib/python3/dist-packages/odoo/addons/base_import
+#      - ./odoo_sys:/usr/lib/python3/dist-packages/odoo
+      - odoo_data16:/var/lib/odoo
+    env_file:
+      - .env
+    environment:
+      - HOST=postgresql
+      - USER=odoo
+      - PASSWORD=odoo
+      - DATA_DIR=/mnt/extra-addons/netsuite_integration/data
+    depends_on:
+      - postgresql
+
+  postgresql:
+    image: "postgres:15.2-alpine"
+    ports:
+      - "5467:5432"
+    restart: always
+    command: postgres -c 'max_connections=500'
+    volumes:
+#      - ./pg_data:/var/lib/postgresql/data
+#      - pg_data17_2:/var/lib/postgresql/data
+      - pg_data16:/var/lib/postgresql/data
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+
+volumes:
+  odoo_data16: {}
+  pg_data: {}
+  pg_data16: {}
+  pg_data17_2: {}

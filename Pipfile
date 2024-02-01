@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pydantic = "*"
+odoo-rpc-client = "*"
+requests = "*"
+requests-oauthlib = "*"
+more-itertools = "*"
+
+[dev-packages]
+pytest = "*"
+jinja2 = "*"
+
+[requires]
+python_version = "3.9"
