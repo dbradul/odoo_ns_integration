@@ -3,5 +3,5 @@
 *.pyc
 __pycache__/
 pg_data*/
-odoo_system/
+odoo/
 

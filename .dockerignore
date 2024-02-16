@@ -1,0 +1,12 @@
+./log/
+./docker
+./odoo
+./pg_*
+./addons
+.git
+.gitignore
+**/.env
+**/.aws
+**/.ssh
+Dockerfile
+docker-compose.*

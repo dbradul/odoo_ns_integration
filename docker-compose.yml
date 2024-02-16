@@ -20,16 +20,16 @@ services:
 #    command: >
 #       sh -c "envsubst < /mnt/extra-addons/netsuite_integration/data/ns.integration.setup.csv.template > /mnt/extra-addons/netsuite_integration/data/ns.integration.setup.csv \
 #             && odoo -u netsuite_integration"
-
     volumes:
-#      - ./odoo/addons:/usr/lib/python3/dist-packages/odoo/addons
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
       - ./commands:/mnt/commands
-#      - ./odoo_system/odoo/base:/usr/lib/python3/dist-packages/odoo/addons/base
-      - ./odoo_system/addons/base:/usr/lib/python3/dist-packages/odoo/addons/base
-      - ./odoo_system/addons/base_import:/usr/lib/python3/dist-packages/odoo/addons/base_import
-#      - ./odoo_sys:/usr/lib/python3/dist-packages/odoo
+      - ./odoo/addons/base:/usr/lib/python3/dist-packages/odoo/addons/base
+#      - ./odoo/addons/sale:/usr/lib/python3/dist-packages/odoo/addons/sale
+      - ./odoo/addons/base_import:/usr/lib/python3/dist-packages/odoo/addons/base_import
+#      - ./odoo/addons/service:/usr/lib/python3/dist-packages/odoo/service
+      - ./odoo/core/models.py:/usr/lib/python3/dist-packages/odoo/models.py
+      - ./odoo/core/modules:/usr/lib/python3/dist-packages/odoo/modules
       - odoo_data16:/var/lib/odoo
     env_file:
       - .env
@@ -48,8 +48,6 @@ services:
     restart: always
     command: postgres -c 'max_connections=500'
     volumes:
-#      - ./pg_data:/var/lib/postgresql/data
-#      - pg_data17_2:/var/lib/postgresql/data
       - pg_data16:/var/lib/postgresql/data
     environment:
       - PGDATA=/var/lib/postgresql/data
@@ -59,6 +57,4 @@ services:
 
 volumes:
   odoo_data16: {}
-  pg_data: {}
   pg_data16: {}
-  pg_data17_2: {}

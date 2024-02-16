@@ -9,10 +9,13 @@ odoo-rpc-client = "*"
 requests = "*"
 requests-oauthlib = "*"
 more-itertools = "*"
+tqdm = "*"
+cexprtk = "*"
+tenacity = "*"
 
 [dev-packages]
 pytest = "*"
 jinja2 = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
