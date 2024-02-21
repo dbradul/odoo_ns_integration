@@ -34,8 +34,12 @@ restart: ## Restart all containers
 	docker compose restart
 
 build: ## Build all or c=<name> images
-	docker compose build ${c}
-#	docker compose build --build-arg ENV_MODE=${ENV_MODE} ${c}
+	docker compose build --build-arg DEV_MODE=${DEV_MODE} ${c}
+	#docker compose build --build-arg ENV_MODE=${ENV_MODE} ${c}
+#	docker compose build ${c}
+
+buildh: ## Build odoo image with local network (hack way)
+	docker build --network host --build-arg DEV_MODE=${DEV_MODE} -t odoo_test_odoo .
 
 buildf: ## Build all or c=<name> images (force)
 	docker compose build --build-arg ENV_MODE=${ENV_MODE} --no-cache ${c}
