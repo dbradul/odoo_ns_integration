@@ -77,5 +77,6 @@ all-tests: ## Run all tests
 	docker compose exec odoo pytest -s -v /mnt/extra-addons/netsuite_integration/tests/ --setup-show
 
 test: ## Run test under development
-	docker compose exec odoo pytest -s -v /mnt/extra-addons/netsuite_integration/tests/test_api.py --setup-show
+#	docker compose exec odoo pytest -s -v /mnt/extra-addons/netsuite_integration/tests/test_api.py --setup-show
+	docker compose exec odoo pytest -s -v /mnt/extra-addons/netsuite_integration/tests/test_model_factory.py --setup-show
 	#docker compose exec odoo pytest -s -v /mnt/extra-addons/netsuite_integration/tests/test_fetcher.py::test_fetch_records --setup-show

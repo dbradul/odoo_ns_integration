@@ -6,6 +6,8 @@ ENV PIPENV_ARG=${DEV_MODE:+--dev}
 
 # Install system libs
 USER root
+RUN apt update
+RUN apt install -y git
 
 # Install packages
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3
