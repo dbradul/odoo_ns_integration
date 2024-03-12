@@ -72,6 +72,18 @@ gen: ## Generate odoo modules and views
 	pipenv run python tools/codegen.py && \
 	cd ../..
 
+restore_db: ## Restore database from dump.sql (internal)
+	docker compose -f docker-compose.yml up -d postgresql
+	sleep 5
+	docker compose exec -it postgresql su - postgres -c "dropdb ${d} -U odoo"
+	docker compose cp dump.sql postgresql:/tmp/
+	docker compose exec -it postgresql su - postgres -c "createdb -U odoo ${d}"
+	docker compose exec -it postgresql su - postgres -c "psql -U odoo -f /tmp/dump.sql ${d}"
+
+
+restore: stop restore_db startd ## Restore database from dump.sql
+
+
 #-- Tests --------------------------------------------------------------------------------------------------------------
 all-tests: ## Run all tests
 	docker compose exec odoo pytest -s -v /mnt/extra-addons/netsuite_integration/tests/ --setup-show

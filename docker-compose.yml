@@ -24,13 +24,15 @@ services:
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
       - ./commands:/mnt/commands
-      - ./odoo/addons/base:/usr/lib/python3/dist-packages/odoo/addons/base
+      - ./enterprise:/mnt/enterprise
+#      - ./odoo/addons/base:/usr/lib/python3/dist-packages/odoo/addons/base
 #      - ./odoo/addons/sale:/usr/lib/python3/dist-packages/odoo/addons/sale
-      - ./odoo/addons/base_import:/usr/lib/python3/dist-packages/odoo/addons/base_import
+#      - ./odoo/addons/base_import:/usr/lib/python3/dist-packages/odoo/addons/base_import
 #      - ./odoo/addons/service:/usr/lib/python3/dist-packages/odoo/service
-      - ./odoo/core/models.py:/usr/lib/python3/dist-packages/odoo/models.py
-      - ./odoo/core/modules:/usr/lib/python3/dist-packages/odoo/modules
+#      - ./odoo/core/models.py:/usr/lib/python3/dist-packages/odoo/models.py
+#      - ./odoo/core/modules:/usr/lib/python3/dist-packages/odoo/modules
       - odoo_data16:/var/lib/odoo
+#      - ./filestore:/var/lib/odoo/filestore/test2
     env_file:
       - .env
     environment:
@@ -49,6 +51,7 @@ services:
     command: postgres -c 'max_connections=500'
     volumes:
       - pg_data16:/var/lib/postgresql/data
+#      - pg_data16_1:/var/lib/postgresql/data
     environment:
       - PGDATA=/var/lib/postgresql/data
       - POSTGRES_PASSWORD=odoo
@@ -58,3 +61,4 @@ services:
 volumes:
   odoo_data16: {}
   pg_data16: {}
+  pg_data16_1: {}

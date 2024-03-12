@@ -4,4 +4,7 @@
 __pycache__/
 pg_data*/
 odoo/
+dump.sql
+enterprise/
+filestore/
 
