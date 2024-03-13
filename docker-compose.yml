@@ -32,7 +32,6 @@ services:
 #      - ./odoo/core/models.py:/usr/lib/python3/dist-packages/odoo/models.py
 #      - ./odoo/core/modules:/usr/lib/python3/dist-packages/odoo/modules
       - odoo_data16:/var/lib/odoo
-#      - ./filestore:/var/lib/odoo/filestore/test2
     env_file:
       - .env
     environment:
@@ -50,7 +49,7 @@ services:
     restart: always
     command: postgres -c 'max_connections=500'
     volumes:
-      - pg_data16:/var/lib/postgresql/data
+      - pg_data16_10:/var/lib/postgresql/data
 #      - pg_data16_1:/var/lib/postgresql/data
     environment:
       - PGDATA=/var/lib/postgresql/data
@@ -61,4 +60,4 @@ services:
 volumes:
   odoo_data16: {}
   pg_data16: {}
-  pg_data16_1: {}
+  pg_data16_10: {}
