@@ -26,7 +26,8 @@ services:
       - ./commands:/mnt/commands
       - ./enterprise:/mnt/enterprise
 #      - ./odoo/addons/base:/usr/lib/python3/dist-packages/odoo/addons/base
-#      - ./odoo/addons/sale:/usr/lib/python3/dist-packages/odoo/addons/sale
+      - ./odoo/addons/sale:/usr/lib/python3/dist-packages/odoo/addons/sale
+      - ./odoo/addons/account:/usr/lib/python3/dist-packages/odoo/addons/account
 #      - ./odoo/addons/base_import:/usr/lib/python3/dist-packages/odoo/addons/base_import
 #      - ./odoo/addons/service:/usr/lib/python3/dist-packages/odoo/service
 #      - ./odoo/core/models.py:/usr/lib/python3/dist-packages/odoo/models.py
